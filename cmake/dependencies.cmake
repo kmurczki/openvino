@@ -92,7 +92,7 @@ endif()
 
 ## TBB package
 unset(_ov_download_tbb_done CACHE)
-
+set(THIRDPARTY_SERVER_PATH "https://download.01.org/opencv/master/openvinotoolkit")
 #
 # The function downloads prebuilt TBB package
 # NOTE: the function should be used if system TBB is not found
@@ -220,18 +220,12 @@ endfunction()
 if(ENABLE_OPENCV)
     reset_deps_cache(OpenCV_DIR)
 
+    set(IE_PATH_TO_DEPS "http://releases.ti.intel.com/Releases/opencv")
     set(OPENCV_VERSION "4.5.5")
     set(OPENCV_BUILD "099")
     set(OPENCV_BUILD_YOCTO "772")
 
     if(AARCH64)
-        if(DEFINED ENV{THIRDPARTY_SERVER_PATH})
-            set(IE_PATH_TO_DEPS "$ENV{THIRDPARTY_SERVER_PATH}")
-        elseif(DEFINED THIRDPARTY_SERVER_PATH)
-            set(IE_PATH_TO_DEPS "${THIRDPARTY_SERVER_PATH}")
-        else()
-            message(WARNING "OpenCV is not found!")
-        endif()
 
         if(DEFINED IE_PATH_TO_DEPS)
             set(OPENCV_SUFFIX "yocto_kmb")
@@ -288,11 +282,11 @@ if(ENABLE_OPENCV)
                 message(FATAL_ERROR "OpenCV is not available on current platform (${LINUX_OS_NAME})")
             endif()
             RESOLVE_DEPENDENCY(OPENCV
-                    ARCHIVE_LIN "opencv/opencv_${OPENCV_VERSION}-${OPENCV_BUILD}_${OPENCV_SUFFIX}.txz"
-                    TARGET_PATH "${TEMP}/opencv_${OPENCV_VERSION}_${OPENCV_SUFFIX}/opencv"
+                    ARCHIVE_WIN "opencv/opencv_${OPENCV_VERSION}-${OPENCV_BUILD}.txz"
+                    TARGET_PATH "${TEMP}/opencv_${OPENCV_VERSION}/opencv"
                     ENVIRONMENT "OpenCV_DIR"
                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*"
-                    SHA256 ${OPENCV_HASH})
+                    SHA256 "f871e3dc3f3850ce2121fccef1a056bf47de8ec692b8e70e4711382dadae7752")
         endif()
     endif()
 

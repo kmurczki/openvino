@@ -220,9 +220,9 @@ endfunction()
 if(ENABLE_OPENCV)
     reset_deps_cache(OpenCV_DIR)
 
-    set(IE_PATH_TO_DEPS "http://releases.ti.intel.com/Releases/opencv")
+    set(IE_PATH_TO_DEPS "http://releases.ti.intel.com/Temp/opencv")
     set(OPENCV_VERSION "4.5.5")
-    set(OPENCV_BUILD "099")
+    set(OPENCV_BUILD "131")
     set(OPENCV_BUILD_YOCTO "772")
 
     if(AARCH64)
@@ -282,11 +282,11 @@ if(ENABLE_OPENCV)
                 message(FATAL_ERROR "OpenCV is not available on current platform (${LINUX_OS_NAME})")
             endif()
             RESOLVE_DEPENDENCY(OPENCV
-                    ARCHIVE_WIN "opencv/opencv_${OPENCV_VERSION}-${OPENCV_BUILD}.txz"
+                    ARCHIVE_LIN "opencv/opencv_${OPENCV_VERSION}-${OPENCV_BUILD}.txz"
                     TARGET_PATH "${TEMP}/opencv_${OPENCV_VERSION}/opencv"
                     ENVIRONMENT "OpenCV_DIR"
                     VERSION_REGEX ".*_([0-9]+.[0-9]+.[0-9]+).*"
-                    SHA256 "f871e3dc3f3850ce2121fccef1a056bf47de8ec692b8e70e4711382dadae7752")
+                    SHA256 "07b72209440bf2140d4a58d496ffc35bb4488e7bca231bdc04c335a495006421")
         endif()
     endif()
 
